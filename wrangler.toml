@@ -2,11 +2,14 @@ name = "learning-spell"
 
 workers_dev = true
 main = "./build/index.js"
-# https://developers.cloudflare.com/workers/platform/compatibility-dates
-compatibility_date = "2023-04-20"
+compatibility_date = "2024-04-03"
+account_id = "ab4ecefcaef1e0ba23455507e91f796b"
 
 [site]
   bucket = "./public"
 
 [build]
   command = "npm run build"
+
+[ai]
+  binding = "AI"
