@@ -1,41 +1,20 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
+import {AudioRecorder} from '../components/AudioRecorder';
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Learning Spell" },
+    { name: "description", content: "Spelling and tongue twister game for kids." },
   ];
 };
 
 export default function Index() {
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+      <h1>Learning Spell</h1>
+      <p>Repeat the sentence below:</p>
+      <p>The quick brown fox jumps over the lazy dog</p>
+      <AudioRecorder callback={() => null} />
     </div>
   );
 }
