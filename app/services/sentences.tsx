@@ -16,3 +16,13 @@ export async function beginPractice() {
 export async function getSentenceById(sentenceId: number) {
 	return messages.find((message) => message.sentenceId === sentenceId);
 }
+
+export async function getNextSentence(sentenceId: number) {
+	const index = messages.findIndex(
+		(message) => message.sentenceId === sentenceId,
+	);
+	if (index === -1 || index + 1 === messages.length) {
+    return null;
+  }
+	return messages[index + 1];
+}

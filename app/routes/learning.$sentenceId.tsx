@@ -4,19 +4,19 @@ import type {
 	MetaFunction,
 } from "@remix-run/cloudflare";
 import { json } from "@remix-run/cloudflare";
-import { useActionData, useLoaderData, useSubmit } from "@remix-run/react";
+import {
+	Form,
+	useActionData,
+	useLoaderData,
+	useSubmit,
+} from "@remix-run/react";
 import { AudioRecorder } from "~/components/AudioRecorder";
+import { Sentence } from "~/components/Sentence";
 import { getSentenceById } from "~/services/sentences";
 import { getTranscription } from "~/services/transcription";
 
 interface Env {
 	AI: unknown;
-}
-
-interface TranscriptedResponse {
-	text: string;
-	word_count: number;
-	words: Array<{ word: string; start: number; end: number }>;
 }
 
 export const meta: MetaFunction = () => {
@@ -63,13 +63,22 @@ export default function Index() {
 			encType: "multipart/form-data",
 		});
 	};
-	if (transcription === undefined) {
-		return (
-			<>
-				<p>{sentence.text}</p>
+	return (
+		<>
+			<Sentence text={sentence.text} />
+			{!transcription ? (
 				<AudioRecorder onRecordDone={onSubmit} />
-			</>
-		);
-	}
-	return <p>test</p>;
+			) : (
+				<>
+					<Sentence text={transcription.text ?? ""} />
+					<Form method="post" action={`/learning/${sentence.sentenceId}/retry`}>
+						<button type="submit">Retry</button>
+					</Form>
+					<Form method="post" action={`/learning/${sentence.sentenceId}/next`}>
+						<button type="submit">Next</button>
+					</Form>
+				</>
+			)}
+		</>
+	);
 }
