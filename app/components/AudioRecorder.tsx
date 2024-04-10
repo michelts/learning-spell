@@ -1,9 +1,9 @@
 import {useState, useRef, useEffect} from 'react';
 import { useAudioRecorder } from 'react-audio-voice-recorder';
 
-interface Props {callback: (audioData: Blob) => void}
+interface Props {onRecordDone: (audioData: Blob) => void}
 
-export function AudioRecorder({callback}: Props) {
+export function AudioRecorder({onRecordDone}: Props) {
   const [audioData, setAudioData] = useState('');
   const hasBeenCalled = useRef(false);
   const {
@@ -17,9 +17,9 @@ export function AudioRecorder({callback}: Props) {
     if (!hasBeenCalled.current && recordingBlob) {
       hasBeenCalled.current = true
       setAudioData(URL.createObjectURL(recordingBlob));
-      callback(recordingBlob);
+      onRecordDone(recordingBlob);
     }
-  }, [recordingBlob, callback])
+  }, [recordingBlob, onRecordDone])
 
   useEffect(() => {
     console.log('XXX', recordingTime);

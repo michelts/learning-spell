@@ -8,6 +8,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import {Container} from './components/Container';
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -23,7 +24,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <Container>
+          <Outlet />
+        </Container>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
