@@ -22,7 +22,7 @@ export async function getNextSentence(sentenceId: number) {
 		(message) => message.sentenceId === sentenceId,
 	);
 	if (index === -1 || index + 1 === messages.length) {
-    return null;
-  }
+		return null;
+	}
 	return messages[index + 1];
 }
