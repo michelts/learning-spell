@@ -8,6 +8,7 @@ import {
 	ScrollRestoration,
 } from "@remix-run/react";
 import { Container } from "./components/Container";
+import { Title } from "./components/Title";
 import styles from "./tailwind.css";
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
@@ -23,6 +24,7 @@ export default function App() {
 			</head>
 			<body>
 				<Container>
+					<Title>Learning Spell</Title>
 					<Outlet />
 				</Container>
 				<ScrollRestoration />

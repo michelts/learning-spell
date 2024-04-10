@@ -1,5 +1,6 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
 import { Form } from "@remix-run/react";
+import { Button } from '~/components/Button';
 
 export const meta: MetaFunction = () => {
 	return [
@@ -15,7 +16,7 @@ export default function Index() {
 	return (
 		<>
 			<Form method="post" action="/learning">
-				<button type="submit">Begin</button>
+				<Button type="submit">Begin</Button>
 			</Form>
 		</>
 	);
