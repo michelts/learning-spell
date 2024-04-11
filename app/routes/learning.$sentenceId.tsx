@@ -15,6 +15,7 @@ import { AudioRecorder } from "~/components/AudioRecorder";
 import { Button } from "~/components/Button";
 import { Content } from "~/components/Content";
 import { HGrid } from "~/components/HGrid";
+import { Sentence } from "~/components/Sentence";
 import { VGrid } from "~/components/VGrid";
 import { getSentenceById } from "~/services/sentences";
 import { getTranscription } from "~/services/transcription";
@@ -80,10 +81,8 @@ export default function Index() {
   }
   return (
     <VGrid>
-      <Content>This is the sentence you should read:</Content>
-      <Content>{sentence.text}</Content>
       <Content>This is what you just read:</Content>
-      <Content>{transcription.text}</Content>
+      <Sentence>{transcription.text}</Sentence>
       <HGrid>
         <Form method="post" action={`/learning/${sentence.sentenceId}/retry`}>
           <Button type="submit">Retry</Button>
