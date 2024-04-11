@@ -1,20 +1,28 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useAudioRecorder } from "react-audio-voice-recorder";
+import { Button } from "~/components/Button";
+import { Content } from "~/components/Content";
+import { HGrid } from "~/components/HGrid";
+import { VGrid } from "~/components/VGrid";
 
 interface Props {
+	text: string;
 	onRecordDone: (audioData: Blob) => void;
 }
 
-export function AudioRecorder({ onRecordDone }: Props) {
-	const [audioData, setAudioData] = useState("");
+export function AudioRecorder({ text, onRecordDone }: Props) {
 	const hasBeenCalled = useRef(false);
-	const { startRecording, stopRecording, recordingBlob, recordingTime } =
-		useAudioRecorder();
+	const {
+		isRecording,
+		startRecording,
+		stopRecording,
+		recordingBlob,
+		recordingTime,
+	} = useAudioRecorder();
 
 	useEffect(() => {
 		if (!hasBeenCalled.current && recordingBlob) {
 			hasBeenCalled.current = true;
-			setAudioData(URL.createObjectURL(recordingBlob));
 			onRecordDone(recordingBlob);
 		}
 	}, [recordingBlob, onRecordDone]);
@@ -24,22 +32,28 @@ export function AudioRecorder({ onRecordDone }: Props) {
 	}, [recordingTime]);
 
 	return (
-		<div>
-			<div>
-				<button type="button" onClick={() => startRecording()}>
-					Begin
-				</button>
-				<button type="button" onClick={() => stopRecording()}>
+		<VGrid>
+			<Content>
+				When you are ready, click to start recording and read the sentence below
+				aloud:
+			</Content>
+			<Content>{text}</Content>
+			<HGrid>
+				<Button
+					type="button"
+					onClick={() => startRecording()}
+					disabled={isRecording}
+				>
+					{!isRecording ? "Record" : "Recording"}
+				</Button>
+				<Button
+					type="button"
+					onClick={() => stopRecording()}
+					disabled={!isRecording}
+				>
 					Stop
-				</button>
-			</div>
-			{recordingBlob ? (
-				<figure>
-					<figcaption>Sound debug:</figcaption>
-					{/* biome-ignore lint/a11y/useMediaCaption: there are reports this might break on iOS */}
-					<audio controls={true} src={audioData} />
-				</figure>
-			) : null}
-		</div>
+				</Button>
+			</HGrid>
+		</VGrid>
 	);
 }

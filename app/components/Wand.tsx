@@ -1,15 +1,15 @@
 export function Wand(): JSX.Element {
 	return (
 		<div className="-ml-5 absolute flex h-[30rem] w-40 items-center overflow-hidden">
-      <div className="absolute top-[9rem] left-[4rem]">
-        <Star />
-      </div>
-      <div className="absolute top-[8rem] left-[8rem]">
-        <Star />
-      </div>
-      <div className="absolute top-[14rem] left-[6rem]">
-        <Star />
-      </div>
+			<div className="absolute top-[9rem] left-[4rem]">
+				<Star />
+			</div>
+			<div className="absolute top-[8rem] left-[8rem]">
+				<Star />
+			</div>
+			<div className="absolute top-[14rem] left-[6rem]">
+				<Star />
+			</div>
 			<div className="origin-top-left translate-x-28 translate-y-16 rotate-[30deg] shadow-[0_0_60px_0_rgba(0,0,0,0.2)]">
 				<div className="h-12 w-5 border border-stone-900 bg-gradient-to-r from-stone-100 to-stone-200">
 					<span className="sr-only">Wand decoration</span>
