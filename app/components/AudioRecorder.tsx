@@ -50,12 +50,9 @@ export function AudioRecorder({ text, isProcessing, onRecordDone }: Props) {
 						}
 					}}
 					disabled={isProcessing}
-          isLoading={isProcessing}
+					isLoading={isProcessing}
 				>
-					<ButtonLabel
-						isProcessing={isProcessing}
-						isRecording={isRecording}
-					/>
+					<ButtonLabel isProcessing={isProcessing} isRecording={isRecording} />
 				</Button>
 			</HGrid>
 		</VGrid>
