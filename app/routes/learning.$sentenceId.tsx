@@ -8,6 +8,7 @@ import {
 	Form,
 	useActionData,
 	useLoaderData,
+	useNavigation,
 	useSubmit,
 } from "@remix-run/react";
 import { AudioRecorder } from "~/components/AudioRecorder";
@@ -57,6 +58,7 @@ export default function Index() {
 	const { sentence } = useLoaderData<typeof loader>();
 	const transcription = useActionData<typeof action>();
 	const submit = useSubmit();
+	const navigation = useNavigation();
 	const onSubmit = (audioBlob: Blob) => {
 		const form = new FormData();
 		form.append("audio", audioBlob, "audio.webm");
@@ -66,32 +68,30 @@ export default function Index() {
 			encType: "multipart/form-data",
 		});
 	};
+
+	if (!transcription) {
+		return (
+			<AudioRecorder
+				text={sentence.text}
+				onRecordDone={onSubmit}
+				isProcessing={navigation.state !== "idle"}
+			/>
+		);
+	}
 	return (
 		<VGrid>
-			{!transcription ? (
-				<AudioRecorder text={sentence.text} onRecordDone={onSubmit} />
-			) : (
-				<VGrid>
-					<Content>This is the sentence you should read:</Content>
-					<Content>{sentence.text}</Content>
-					<Content>This is what you just read:</Content>
-					<Content>{transcription.text}</Content>
-					<HGrid>
-						<Form
-							method="post"
-							action={`/learning/${sentence.sentenceId}/retry`}
-						>
-							<Button type="submit">Retry</Button>
-						</Form>
-						<Form
-							method="post"
-							action={`/learning/${sentence.sentenceId}/next`}
-						>
-							<Button type="submit">Next</Button>
-						</Form>
-					</HGrid>
-				</VGrid>
-			)}
+			<Content>This is the sentence you should read:</Content>
+			<Content>{sentence.text}</Content>
+			<Content>This is what you just read:</Content>
+			<Content>{transcription.text}</Content>
+			<HGrid>
+				<Form method="post" action={`/learning/${sentence.sentenceId}/retry`}>
+					<Button type="submit">Retry</Button>
+				</Form>
+				<Form method="post" action={`/learning/${sentence.sentenceId}/next`}>
+					<Button type="submit">Next</Button>
+				</Form>
+			</HGrid>
 		</VGrid>
 	);
 }

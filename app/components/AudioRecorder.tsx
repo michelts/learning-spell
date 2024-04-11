@@ -7,10 +7,11 @@ import { VGrid } from "~/components/VGrid";
 
 interface Props {
 	text: string;
+	isProcessing: boolean;
 	onRecordDone: (audioData: Blob) => void;
 }
 
-export function AudioRecorder({ text, onRecordDone }: Props) {
+export function AudioRecorder({ text, isProcessing, onRecordDone }: Props) {
 	const hasBeenCalled = useRef(false);
 	const {
 		isRecording,
@@ -41,19 +42,35 @@ export function AudioRecorder({ text, onRecordDone }: Props) {
 			<HGrid>
 				<Button
 					type="button"
-					onClick={() => startRecording()}
-					disabled={isRecording}
+					onClick={() => {
+						if (!isRecording) {
+							startRecording();
+						} else {
+							stopRecording();
+						}
+					}}
+					disabled={isProcessing}
+          isLoading={isProcessing}
 				>
-					{!isRecording ? "Record" : "Recording"}
-				</Button>
-				<Button
-					type="button"
-					onClick={() => stopRecording()}
-					disabled={!isRecording}
-				>
-					Stop
+					<ButtonLabel
+						isProcessing={isProcessing}
+						isRecording={isRecording}
+					/>
 				</Button>
 			</HGrid>
 		</VGrid>
 	);
+}
+
+function ButtonLabel({
+	isRecording,
+	isProcessing,
+}: { isRecording: boolean; isProcessing: boolean }) {
+	if (isProcessing) {
+		return "Please Wait";
+	}
+	if (isRecording) {
+		return "Stop Recording";
+	}
+	return "Start Recording";
 }
