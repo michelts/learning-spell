@@ -3,6 +3,7 @@ import { useAudioRecorder } from "react-audio-voice-recorder";
 import { Button } from "~/components/Button";
 import { Content } from "~/components/Content";
 import { HGrid } from "~/components/HGrid";
+import { Sentence } from "~/components/Sentence";
 import { VGrid } from "~/components/VGrid";
 
 interface Props {
@@ -38,7 +39,7 @@ export function AudioRecorder({ text, isProcessing, onRecordDone }: Props) {
 				When you are ready, click to start recording and read the sentence below
 				aloud:
 			</Content>
-			<Content>{text}</Content>
+			<Sentence>{text}</Sentence>
 			<HGrid>
 				<Button
 					type="button"

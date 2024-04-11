@@ -1,13 +1,11 @@
-import { Content } from "~/components/Content";
+import type { ReactNode } from "react";
 
-export function Sentence(props: { text: string }): JSX.Element {
+export function Sentence({ children }: { children: ReactNode }): JSX.Element {
 	return (
-		<>
-			<Content>
-				When you are ready, click to start recording and read the sentence below
-				aloud:
-			</Content>
-			<Content>{props.text}</Content>
-		</>
+		<div className="flex">
+			<div className="relative z-1 rounded-lg border border-white/30 bg-white/10 p-3 font-bold text-rose-100 leading-relaxed">
+				{children}
+			</div>
+		</div>
 	);
 }
