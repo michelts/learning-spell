@@ -51,7 +51,7 @@ export function AudioRecorder({ text, isProcessing, onRecordDone }: Props) {
             }
           }}
           disabled={isProcessing}
-          isLoading={isProcessing}
+          isLoading={isRecording || isProcessing}
         >
           <ButtonLabel isProcessing={isProcessing} isRecording={isRecording} />
         </Button>
