@@ -1,15 +1,15 @@
-import type { ReactNode, ComponentPropsWithRef } from "react";
+import type { ComponentPropsWithRef, ReactNode } from "react";
 
-interface Props extends ComponentPropsWithRef<'button'> {
+interface Props extends ComponentPropsWithRef<"button"> {
   children: ReactNode;
-  isLoading?: boolean
+  isLoading?: boolean;
 }
 
 export function Button({
   children,
   isLoading = false,
   ...rest
-}: Props ): JSX.Element {
+}: Props): JSX.Element {
   return (
     <button
       className="group -z-1 relative rounded-xl bg-rose-600 px-4 py-2 font-bold font-mono text-rose-100 text-xl shadow-glow shadow-rose-600/40 disabled:cursor-not-allowed disabled:bg-stone-400 hover:bg-rose-700 disabled:text-stone-600 hover:underline hover:decoration-rose-200/40 hover:decoration-dotted hover:underline-offset-4 disabled:shadow-stone-500/40 hover:shadow-rose-700/50"

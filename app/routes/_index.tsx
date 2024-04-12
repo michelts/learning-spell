@@ -2,6 +2,7 @@ import type { MetaFunction } from "@remix-run/cloudflare";
 import { Form } from "@remix-run/react";
 import { Button } from "~/components/Button";
 import { Content } from "~/components/Content";
+import { TranscriptionResult } from "~/components/TranscriptionResult";
 import { VGrid } from "~/components/VGrid";
 
 export const meta: MetaFunction = () => {
