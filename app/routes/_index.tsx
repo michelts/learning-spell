@@ -1,4 +1,5 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
+import { useNavigation } from "@remix-run/react";
 import { Form } from "@remix-run/react";
 import { Button } from "~/components/Button";
 import { Content } from "~/components/Content";
@@ -15,6 +16,8 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
+  const navigation = useNavigation();
+  const isLoading = navigation.state !== "idle";
   return (
     <VGrid>
       <Content>
@@ -23,7 +26,9 @@ export default function Index() {
         let the learning begin!
       </Content>
       <Form method="post" action="/learning">
-        <Button type="submit">Begin</Button>
+        <Button type="submit" isLoading={isLoading} disabled={isLoading}>
+          {isLoading ? "Please wait" : "Begin"}
+        </Button>
       </Form>
     </VGrid>
   );

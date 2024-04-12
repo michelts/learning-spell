@@ -10,14 +10,14 @@ export function TranscriptionResult({
   return (
     <Sentence>
       <div className="flex flex-wrap gap-1">
-        {terms.map((term, index) => {
+        {terms.map((term) => {
           if (term.added) {
-            return <Added key={index}>{term.value}</Added>;
+            return <Added key={term.id}>{term.value}</Added>;
           }
           if (term.removed) {
-            return <Removed key={index}>{term.value}</Removed>;
+            return <Removed key={term.id}>{term.value}</Removed>;
           }
-          return <Correct key={index}>{term.value}</Correct>;
+          return <Correct key={term.id}>{term.value}</Correct>;
         })}
       </div>
     </Sentence>

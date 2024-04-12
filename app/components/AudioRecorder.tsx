@@ -16,7 +16,9 @@ const charToSecondsRate = 6;
 
 export function AudioRecorder({ text, isProcessing, onRecordDone }: Props) {
   const hasBeenCalled = useRef(false);
-  const recordingLimit = Number.parseInt(String(Math.ceil(text.length / charToSecondsRate)));
+  const recordingLimit = Number.parseInt(
+    String(Math.ceil(text.length / charToSecondsRate)),
+  );
 
   const {
     isRecording,

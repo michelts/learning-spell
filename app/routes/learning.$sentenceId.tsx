@@ -19,10 +19,7 @@ import { TranscriptionResult } from "~/components/TranscriptionResult";
 import { VGrid } from "~/components/VGrid";
 import { getSentenceById } from "~/services/sentences";
 import { getTranscription } from "~/services/transcription";
-
-interface Env {
-  AI: unknown;
-}
+import type { Env } from "~/types";
 
 export const meta: MetaFunction = () => {
   return [
@@ -50,7 +47,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
   const body = await request.formData();
   const transcription = await getTranscription({
     audioFile: body.get("audio") as File,
-    aiBind: (context.env as Env).AI,
+    env: context.env as Env,
   });
   return json(transcription);
 }

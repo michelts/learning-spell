@@ -1,4 +1,7 @@
-const messages = [
+import { generateQuote } from "~/services/quotes";
+import type { Env } from "~/types";
+
+const _messages = [
   { sentenceId: 1, text: "The quick brown fox jumps over the lazy dog" },
   { sentenceId: 2, text: "Waltz, bad nymph, for quick jigs vex." },
   { sentenceId: 3, text: "Glib jocks quiz nymph to vex dwarf." },
@@ -9,20 +12,21 @@ const messages = [
   { sentenceId: 8, text: "Pack my box with five dozen liquor jugs." },
 ];
 
-export async function beginPractice() {
-  return messages[0];
+export async function beginPractice(args: { env: Env }) {
+  const quote = await generateQuote(args.env);
+  return { sentenceId: 1, text: _messages[0] };
 }
 
 export async function getSentenceById(sentenceId: number) {
-  return messages.find((message) => message.sentenceId === sentenceId);
+  return _messages.find((message) => message.sentenceId === sentenceId);
 }
 
 export async function getNextSentence(sentenceId: number) {
-  const index = messages.findIndex(
+  const index = _messages.findIndex(
     (message) => message.sentenceId === sentenceId,
   );
-  if (index === -1 || index + 1 === messages.length) {
+  if (index === -1 || index + 1 === _messages.length) {
     return null;
   }
-  return messages[index + 1];
+  return _messages[index + 1];
 }
