@@ -8,6 +8,13 @@ test("should return all words as correct if sentences match", () => {
   expect(output).toEqual([{ value: "that's all folks", count: 7 }]);
 });
 
+test("should ignore punctuation", () => {
+  const sentence = "That's? all folks!";
+  const transcription = "That's all, folks.";
+  const output = compareSentences(sentence, transcription);
+  expect(output).toEqual([{ value: "That's all folks", count: 7 }]);
+});
+
 test("should indicate incorrect words", () => {
   const sentence = "That's all folks";
   const transcription = "This all falcons";
