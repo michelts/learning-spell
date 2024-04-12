@@ -31,12 +31,15 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export async function loader({ params }: LoaderFunctionArgs) {
-  const sentenceId = Number.parseInt(params.sentenceId ?? "");
-  if (Number.isNaN(sentenceId)) {
+export async function loader({ params, context }: LoaderFunctionArgs) {
+  const sentenceId = params.sentenceId ?? "";
+  if (!sentenceId) {
     throw new Response("", { status: 404 });
   }
-  const sentence = await getSentenceById(sentenceId);
+  const sentence = await getSentenceById({
+    env: context.env as Env,
+    id: sentenceId,
+  });
   if (!sentence) {
     throw new Response("", { status: 404 });
   }
@@ -62,7 +65,7 @@ export default function Index() {
     form.append("audio", audioBlob, "audio.webm");
     submit(form, {
       method: "post",
-      action: `/learning/${sentence.sentenceId}`,
+      action: `/learning/${sentence.id}`,
       encType: "multipart/form-data",
     });
   };
@@ -84,10 +87,10 @@ export default function Index() {
         transcription={transcription.text}
       />
       <HGrid>
-        <Form method="post" action={`/learning/${sentence.sentenceId}/retry`}>
+        <Form method="post" action={`/learning/${sentence.id}/retry`}>
           <Button type="submit">Retry</Button>
         </Form>
-        <Form method="post" action={`/learning/${sentence.sentenceId}/next`}>
+        <Form method="post" action={`/learning/${sentence.id}/next`}>
           <Button type="submit">Next</Button>
         </Form>
       </HGrid>

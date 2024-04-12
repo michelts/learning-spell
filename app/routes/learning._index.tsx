@@ -5,5 +5,5 @@ import type { Env } from "~/types";
 
 export async function action({ context }: ActionFunctionArgs) {
   const sentence = await beginPractice({ env: context.env as Env });
-  return redirect(`/learning/${sentence.sentenceId}`);
+  return redirect(`/learning/${sentence.id}`);
 }
