@@ -58,6 +58,7 @@ export function AudioRecorder({ text, isProcessing, onRecordDone }: Props) {
           }}
           disabled={isProcessing}
           isLoading={isProcessing}
+          data-testid="record-button"
         >
           <ButtonLabel
             step={recordingLimit - recordingTime}
