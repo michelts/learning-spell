@@ -9,7 +9,7 @@ export function TranscriptionResult({
   const terms = compareSentences(text, transcription);
   return (
     <Sentence>
-      <div className="flex gap-1">
+      <div className="flex flex-wrap gap-1">
         {terms.map((term) => {
           if (term.added) {
             return <Added>{term.value}</Added>;
@@ -25,19 +25,19 @@ export function TranscriptionResult({
 }
 
 const Added = ({ children }: { children: ReactNode }) => (
-  <span className="underline decoration-red-500 decoration-wavy underline-offset-2">
+  <span className="whitespace-nowrap underline decoration-red-500 decoration-wavy underline-offset-2">
     {children}
   </span>
 );
 
 const Removed = ({ children }: { children: ReactNode }) => (
-  <span className="line-through decoration-2 decoration-red-500">
+  <span className="whitespace-nowrap line-through decoration-2 decoration-red-500">
     {children}
   </span>
 );
 
 const Correct = ({ children }: { children: ReactNode }) => (
-  <span className="underline decoration-2 decoration-green-500 underline-offset-2">
+  <span className="whitespace-nowrap underline decoration-2 decoration-green-500 underline-offset-2">
     {children}
   </span>
 );

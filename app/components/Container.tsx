@@ -5,9 +5,9 @@ export function Container({ children }: { children: ReactNode }): JSX.Element {
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-gradient-to-br from-fuchsia-950 to-purple-950 p-5 md:p-0">
       <div className="h-full w-full rounded-4xl bg-gradient-to-br from-fuchsia-700 to-purple-900 p-5 shadow-fuchsia-700/40 shadow-glow2 md:h-5/6 md:w-9/12 md:max-w-2xl">
-        <div className="flex h-full w-full items-center justify-center gap-5 md:gap-10">
+        <div className="flex h-full w-full max-w-full items-center justify-center gap-5 md:gap-10">
           <Wand />
-          <div className="flex h-full w-full flex-col items-start justify-center">
+          <div className="flex h-full w-full max-w-full flex-col items-start justify-center overflow-hidden">
             {children}
           </div>
         </div>
