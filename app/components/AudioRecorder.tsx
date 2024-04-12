@@ -12,8 +12,12 @@ interface Props {
   onRecordDone: (audioData: Blob) => void;
 }
 
+const charToSecondsRate = 6;
+
 export function AudioRecorder({ text, isProcessing, onRecordDone }: Props) {
   const hasBeenCalled = useRef(false);
+  const recordingLimit = Number.parseInt(String(Math.ceil(text.length / charToSecondsRate)));
+
   const {
     isRecording,
     startRecording,
@@ -30,8 +34,10 @@ export function AudioRecorder({ text, isProcessing, onRecordDone }: Props) {
   }, [recordingBlob, onRecordDone]);
 
   useEffect(() => {
-    console.log("XXX", recordingTime);
-  }, [recordingTime]);
+    if (recordingTime > recordingLimit) {
+      stopRecording();
+    }
+  }, [recordingTime, recordingLimit, stopRecording]);
 
   return (
     <VGrid>
@@ -51,9 +57,13 @@ export function AudioRecorder({ text, isProcessing, onRecordDone }: Props) {
             }
           }}
           disabled={isProcessing}
-          isLoading={isRecording || isProcessing}
+          isLoading={isProcessing}
         >
-          <ButtonLabel isProcessing={isProcessing} isRecording={isRecording} />
+          <ButtonLabel
+            step={recordingLimit - recordingTime}
+            isProcessing={isProcessing}
+            isRecording={isRecording}
+          />
         </Button>
       </HGrid>
     </VGrid>
@@ -61,14 +71,24 @@ export function AudioRecorder({ text, isProcessing, onRecordDone }: Props) {
 }
 
 function ButtonLabel({
+  step,
   isRecording,
   isProcessing,
-}: { isRecording: boolean; isProcessing: boolean }) {
+}: { step: number; isRecording: boolean; isProcessing: boolean }) {
   if (isProcessing) {
     return "Please Wait";
   }
   if (isRecording) {
-    return "Stop Recording";
+    return (
+      <>
+        {step ? (
+          <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-rose-100/60 text-rose-900">
+            {step}
+          </span>
+        ) : null}{" "}
+        Stop Recording
+      </>
+    );
   }
   return "Start Recording";
 }
