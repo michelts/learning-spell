@@ -22,7 +22,7 @@ export default function Index() {
     <VGrid>
       <Content>
         Hello, young spellers! With Learning Spell, you can practice spelling
-        like never before. Record your voice, match it with the sentence, and
+        like never before. Read a sentence, record your voice, match them and
         let the learning begin!
       </Content>
       <Form method="post" action="/learning">
