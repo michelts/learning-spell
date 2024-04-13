@@ -43,7 +43,7 @@ export async function getGroup({
       transcription: parent.transcription,
     })
     .from(sentences)
-    .innerJoin(parent, eq(parent.id, sentences.id))
+    .innerJoin(parent, eq(parent.learningSession, sentences.learningSession))
     .where(eq(sentences.id, id));
   return records;
 }

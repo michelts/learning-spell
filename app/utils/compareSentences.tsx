@@ -7,5 +7,5 @@ export function compareSentences(sentence: string, transcription: string) {
 }
 
 function prepare(sentence: string) {
-  return sentence.replaceAll(/[,.?!;:]/g, "");
+  return sentence.replaceAll(/[,.?!;:-]/g, "");
 }

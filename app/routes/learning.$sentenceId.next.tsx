@@ -1,6 +1,6 @@
 import { redirect } from "@remix-run/cloudflare";
 import type { ActionFunctionArgs } from "@remix-run/cloudflare";
-import { getNextSentence } from "~/services/sentences";
+import { createNextSentence } from "~/services/sentences";
 import type { Env } from "~/types";
 
 export async function action({ params, context }: ActionFunctionArgs) {
@@ -8,7 +8,7 @@ export async function action({ params, context }: ActionFunctionArgs) {
   if (!sentenceId) {
     throw new Response("", { status: 404 });
   }
-  const nextSentence = await getNextSentence({
+  const nextSentence = await createNextSentence({
     env: context.env as Env,
     id: sentenceId,
   });

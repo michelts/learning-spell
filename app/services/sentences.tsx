@@ -14,7 +14,7 @@ export async function getSentenceById(
   return await sentences.get(...args);
 }
 
-export async function getNextSentence(
+export async function createNextSentence(
   ...args: Parameters<typeof sentences.get>
 ) {
   const { env, id } = args[0];
@@ -26,6 +26,10 @@ export async function getNextSentence(
     env,
     previousSentences: latestSentences.map((sentence) => sentence.text),
   });
-  const newSentence = await sentences.create({ env, text });
+  const newSentence = await sentences.create({
+    env,
+    text,
+    learningSession: latestSentences[0].learningSession,
+  });
   return newSentence;
 }

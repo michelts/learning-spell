@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "361e635e-3586-4207-b4bb-74dc14feb462",
+  "id": "07054498-ca58-43b9-895b-90230e293e13",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "sentences": {
@@ -9,6 +9,13 @@
       "columns": {
         "id": {
           "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "learningSession": {
+          "name": "learningSession",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -30,10 +37,12 @@
         }
       },
       "indexes": {
-        "sentences_id_unique": {
-          "name": "sentences_id_unique",
-          "columns": ["id"],
-          "isUnique": true
+        "learningSession_idx": {
+          "name": "learningSession_idx",
+          "columns": [
+            "learningSession"
+          ],
+          "isUnique": false
         }
       },
       "foreignKeys": {},
