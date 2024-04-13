@@ -39,9 +39,7 @@
       "indexes": {
         "learningSession_idx": {
           "name": "learningSession_idx",
-          "columns": [
-            "learningSession"
-          ],
+          "columns": ["learningSession"],
           "isUnique": false
         }
       },

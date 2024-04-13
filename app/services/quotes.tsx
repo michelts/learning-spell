@@ -27,10 +27,10 @@ export async function generateQuote(args: {
 }
 
 const themes = [
-  'quote from harry potter movies or books',
-  'quote from the godfather movie or book',
-  'famous quote',
-]
+  "quote from harry potter movies or books",
+  "quote from the godfather movie or book",
+  "famous quote",
+];
 
 function* getMessages(texts: string[]) {
   yield {
@@ -39,8 +39,7 @@ function* getMessages(texts: string[]) {
   };
   yield {
     role: "user",
-    content:
-      `Give me a single ${themes[0]}. Return data only as structured JSON.`,
+    content: `Give me a single ${themes[0]}. Return data only as structured JSON.`,
   };
   for (const text of texts) {
     yield { role: "system", content: JSON.stringify({ quote: text }) };

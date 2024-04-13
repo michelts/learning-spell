@@ -88,10 +88,28 @@ export default function Index() {
       />
       <HGrid>
         <Form method="post" action={`/learning/${sentence.id}/retry`}>
-          <Button type="submit">Retry</Button>
+          <Button
+            type="submit"
+            disabled={navigation.state !== "idle"}
+            isLoading={
+              navigation.state !== "idle" &&
+              navigation.location.pathname === `/learning/${sentence.id}/retry`
+            }
+          >
+            Retry
+          </Button>
         </Form>
         <Form method="post" action={`/learning/${sentence.id}/next`}>
-          <Button type="submit">Next</Button>
+          <Button
+            type="submit"
+            disabled={navigation.state !== "idle"}
+            isLoading={
+              navigation.state !== "idle" &&
+              navigation.location.pathname === `/learning/${sentence.id}/next`
+            }
+          >
+            Next
+          </Button>
         </Form>
       </HGrid>
     </VGrid>
