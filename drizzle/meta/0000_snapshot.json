@@ -32,9 +32,7 @@
       "indexes": {
         "sentences_id_unique": {
           "name": "sentences_id_unique",
-          "columns": [
-            "id"
-          ],
+          "columns": ["id"],
           "isUnique": true
         }
       },

@@ -18,13 +18,13 @@ export async function getNextSentence(
   ...args: Parameters<typeof sentences.get>
 ) {
   const { env, id } = args[0];
-  const latestSentence = await sentences.get({ env, id });
-  if (!latestSentence) {
+  const latestSentences = await sentences.getGroup({ env, id });
+  if (!latestSentences.length) {
     return null;
   }
   const text = await generateQuote({
     env,
-    previousSentences: [latestSentence.text],
+    previousSentences: latestSentences.map((sentence) => sentence.text),
   });
   const newSentence = await sentences.create({ env, text });
   return newSentence;

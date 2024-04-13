@@ -11,9 +11,14 @@ export async function generateQuote(args: {
   const messages = Array.from(getMessages(args.previousSentences ?? []));
   const ai = new Ai(args.env.AI);
   const modelName = "@hf/thebloke/mistral-7b-instruct-v0.1-awq";
-  const response = await ai.run(modelName, { messages });
+  const result = (await ai.run(modelName, { messages })) as {
+    response: string;
+  };
   try {
-    const jsonMatch = response.response.replaceAll("\n", "").match(/(\{.*\})/);
+    const jsonMatch = result.response.replaceAll("\n", "").match(/(\{.*\})/);
+    if (!jsonMatch) {
+      return fallbackQuote;
+    }
     const data = JSON.parse(jsonMatch[0]);
     return data.quote;
   } catch {
