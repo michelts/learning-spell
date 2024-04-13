@@ -24,7 +24,7 @@ export async function generateQuote(args: {
 function* getMessages(texts: string[]) {
   yield {
     role: "system",
-    content: "You are a processor that returns structured JSON data.",
+    content: "You are a quote master.",
   };
   yield {
     role: "user",
