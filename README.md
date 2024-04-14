@@ -1,37 +1,36 @@
-# Welcome to Remix!
+# Learning Spell
 
-- [Remix Docs](https://remix.run/docs)
+Web application for practicing language skills.
+
+## Technical overview
+
+The project uses Remix running on Cloudflare Workers.
 
 ## Development
 
-You will be running two processes during development:
-
-- The Miniflare server (miniflare is a local environment for Cloudflare Workers)
-- The Remix development server
-
-Both are started with one command:
-
-```sh
-npm run dev
-```
+- Install dependencies using `pnpm install`
+- Create the database by running the command `npx wrangler d1 migrations apply --local DB`
+- Start the development server using `pnpm dev`
 
 Open up [http://127.0.0.1:8787](http://127.0.0.1:8787) and you should be ready to go!
 
-If you want to check the production build, you can stop the dev server and run following commands:
+The project uses Cloudflare Workers AI and thus, you might need to set your
+account id even to run the project locally. Do it by settings an `.env` file
+with the variable CLOUDFLARE_ACCOUNT_ID pointing to your account id.
 
-```sh
-npm run build
-npm start
-```
-
-Then refresh the same URL in your browser (no live reload for production builds).
 
 ## Deployment
 
-If you don't already have an account, then [create a cloudflare account here](https://dash.cloudflare.com/sign-up) and after verifying your email address with Cloudflare, go to your dashboard and set up your free custom Cloudflare Workers subdomain.
+If you don't already have an account, then [create a cloudflare account
+here](https://dash.cloudflare.com/sign-up) and after verifying your email
+address with Cloudflare, go to your dashboard and set up your free custom
+Cloudflare Workers subdomain.
 
 Once that's done, you should be able to deploy your app:
 
 ```sh
 npm run deploy
 ```
+
+You might need change the database name and id in the wrangler.toml file before
+deploying though.
