@@ -22,8 +22,8 @@ export default function Index() {
     <VGrid>
       <Content>
         Hello, young spellers! With Learning Spell, you can practice spelling
-        like never before. Read a sentence, record your voice, match them and
-        let the learning begin!
+        like never before. Read a sentence, record your voice, match it, and let
+        the learning begin!
       </Content>
       <Form method="post" action="/learning">
         <Button type="submit" isLoading={isLoading} disabled={isLoading}>

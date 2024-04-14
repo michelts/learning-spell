@@ -4,7 +4,7 @@ export function SentenceTranslation({ translation }: { translation?: string }) {
   }
   return (
     <div className="text-rose-200/80">
-      Tip: the translation of this sentence to portuguese is{" "}
+      Tip: the translation of this sentence to Portuguese is{" "}
       <em>&quot;{translation}&quot;</em>
     </div>
   );
