@@ -1,5 +1,6 @@
 import * as sentences from "~/entities/sentences";
 import { generateQuote } from "~/services/quotes";
+import { getTranslation } from "~/services/translation";
 import type { Env } from "~/types";
 
 export async function beginPractice({ env }: { env: Env }) {
@@ -32,4 +33,17 @@ export async function createNextSentence(
     learningSession: latestSentences[0].learningSession,
   });
   return newSentence;
+}
+
+export async function getSentenceTranslation(
+  ...args: Parameters<typeof sentences.get>
+) {
+  const sentence = await sentences.get(...args);
+  if (!sentence) {
+    return "";
+  }
+  return await getTranslation({
+    env: args[0].env as Env,
+    text: sentence.text,
+  });
 }

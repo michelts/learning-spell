@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { alias } from "drizzle-orm/sqlite-core";
-import { SetRequired } from "type-fest";
+import type { SetRequired } from "type-fest";
 
 import { db } from "~/db";
 import { sentences } from "~/schema";
