@@ -1,5 +1,5 @@
+import { index, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { ulidFactory } from "ulid-workers";
-import { sqliteTable, text, index } from "drizzle-orm/sqlite-core";
 
 export const sentences = sqliteTable(
   "sentences",
